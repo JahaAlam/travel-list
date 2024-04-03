@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-const initialItems = [
+/* const initialItems = [
   { id: 1, description: "Passports", quantity: 2, packed: false },
   { id: 2, description: "Socks", quantity: 12, packed: true },
   { id: 3, description: "Charger", quantity: 1, packed: false },
-];
+]; */
 
 export default function App(){
   const [items, setItems] = useState([]);
@@ -32,7 +32,7 @@ return (
   <Logo />
   <Form onAddItems={handleAddItems} />
   <PackingList  items={items} onDeleteItem={handleDeleteItem} onToggleItem ={handleToggleItem} />
-  <Stats />
+  <Stats items={items}/>
 </div>
 
 )
@@ -123,10 +123,12 @@ function Item({ item, onDeleteItem,onToggleItem }) {
 }
 
 
-
-
-function Stats(){
+function Stats({items }){
+  const numItems = items.length;
+  const numPacked = items.filter((item)=> item.packed).length;
+  const parcentage = Math.round((numPacked / numItems) * 100);
   return <footer className="stats">
-    <em>you have X items on your list, and you already x (x%)</em>
+    <em>you have {numItems} items on your list, and you already
+     {numPacked} ({parcentage}%)</em>
   </footer>
 }
