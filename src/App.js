@@ -128,7 +128,13 @@ function Stats({items }){
   const numPacked = items.filter((item)=> item.packed).length;
   const parcentage = Math.round((numPacked / numItems) * 100);
   return <footer className="stats">
-    <em>you have {numItems} items on your list, and you already
-     {numPacked} ({parcentage}%)</em>
+    <em>
+      {parcentage === 100 ? "You r are done, Now Reeady to go"
+      :
+
+     ` you have ${numItems} items on your list, and you already
+     ${numPacked} (${parcentage}%)`
+}
+     </em>
   </footer>
 }
